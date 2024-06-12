@@ -16,8 +16,9 @@ export class FilesController {
       },
     }),
   }))
-  uploadFile(@UploadedFile() file: Express.Multer.File) {
-    return { message: 'File uploaded successfully', filename: file.filename };
+  uploadFile(@UploadedFile() file: Express.Multer.File, @Res() res: Response) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    return res.json({ message: 'File uploaded successfully', filename: file.filename });
   }
 
   @Get(':filename')
